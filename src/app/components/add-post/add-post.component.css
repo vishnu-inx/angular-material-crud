@@ -1,0 +1,10 @@
+.container2 {
+    width: 450px;
+    height: 400px;
+}
+
+.add-post-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}

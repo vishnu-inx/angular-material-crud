@@ -1,0 +1,34 @@
+<div class="container add-user-container">
+    <div>
+        <div routerLink="/" style="margin-bottom: 25px; font-size: 20px; cursor: pointer;" title="back"><i
+                class="fa fa-arrow-left" aria-hidden="true"></i>
+        </div>
+        <mat-card>
+            <h3 style="text-align: center">Create new user</h3>
+            <form [formGroup]="userForm" (ngSubmit)="create()" class="example-form">
+                <mat-form-field appearance="outline" class="form-element">
+                    <mat-label>First Name</mat-label>
+                    <input matInput formControlName="firstName" />
+                    <mat-error *ngIf="checkError('firstName', 'required')">First Name is required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-element">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput formControlName="lastName" />
+                    <mat-error *ngIf="checkError('lastName', 'required')">Last Name is required</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-element">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" />
+                    <mat-error *ngIf="checkError('email', 'required')">Email is required</mat-error>
+                    <mat-error *ngIf="checkError('email', 'email')">Enter valid email</mat-error>
+                </mat-form-field>
+
+                <div>
+                    <button mat-raised-button color="primary" style="width: 100%;">Create</button>
+                </div>
+            </form>
+        </mat-card>
+    </div>
+</div>

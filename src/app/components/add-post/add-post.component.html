@@ -1,0 +1,24 @@
+<div class="container2 add-user-container">
+    <h3 style="text-align: center">Create new post</h3>
+    <hr>
+    <div class="add-post-form">
+        <form [formGroup]="userForm" (ngSubmit)="confirmAdd()" class="example-form">
+        
+            <mat-form-field appearance="outline" class="form-element">
+                <mat-label>Title</mat-label>
+                <input matInput formControlName="title" />
+                <mat-error *ngIf="checkError('title', 'required')">Title is required</mat-error>
+            </mat-form-field>
+        
+            <mat-form-field appearance="outline" class="form-element">
+                <mat-label>Descreption</mat-label>
+                <input matInput formControlName="body" />
+                <mat-error *ngIf="checkError('body', 'required')">Descreption is required</mat-error>
+            </mat-form-field>
+        
+            <div style="margin-top: 20px;">
+                <button style="width: 100%;" mat-raised-button color="primary">Create</button>
+            </div>
+        </form>
+    </div>
+</div>

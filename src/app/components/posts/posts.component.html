@@ -1,0 +1,118 @@
+<!-- <div class="container1">
+    <div class="header-btn">
+        <div routerLink="/" style="margin-bottom: 25px; font-size: 20px; cursor: pointer;">
+            <i title="back" class="fa fa-arrow-left" aria-hidden="true"></i>
+        </div>
+        <div (click)="addNewPost()">
+            <i title="add new post" class="fa fa-plus" aria-hidden="true" style="margin-bottom: 25px; font-size: 20px; cursor: pointer;"></i>
+        </div>
+    </div>
+    <mat-accordion *ngIf="userPosts?.length; else other_content">
+        <ng-container *ngFor="let post of userPosts" >
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{ post.title | uppercase }}
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <p>{{ post.body }}</p>
+                <h4>Comments :</h4>
+                <hr>
+                <ng-container *ngFor="let comment of post.comments">
+                    <div> <span>Comment :</span>  {{comment.name}}</div>
+                    <div> <span>Email :</span> {{comment.email}}</div>
+                    <hr>
+                </ng-container>
+                <form [formGroup]="commentForm"  (ngSubmit)="addNewComment(post.id)" class="example-form">
+                    <div class="comment-form">
+                        <mat-form-field appearance="outline" class="form-element">
+                            <mat-label>Comment</mat-label>
+                            <input matInput formControlName="name" />
+                            <mat-error *ngIf="checkError('name', 'required')">This field is required</mat-error>
+                        </mat-form-field>
+                    
+                        <mat-form-field appearance="outline" class="form-element">
+                            <mat-label>Email</mat-label>
+                            <input matInput formControlName="email" />
+                            <mat-error *ngIf="checkError('email', 'required')">Email is required</mat-error>
+                            <mat-error *ngIf="checkError('email', 'email')">Enter valid email</mat-error>
+                        </mat-form-field>
+                    
+                        <mat-form-field appearance="outline" class="form-element">
+                            <mat-label>Description</mat-label>
+                            <input matInput formControlName="body" />
+                        </mat-form-field>
+                    
+                        <button style="height: 50px;" mat-raised-button color="primary">Add comment</button>
+                    </div>
+                </form>
+            </mat-expansion-panel>
+        </ng-container>
+    </mat-accordion>
+    <ng-template #other_content>
+        <div class="container">
+            <h4 style="margin-right: 20px;">Not found any post</h4>
+            <button mat-raised-button color="primary" (click)="addNewPost()">
+                <i title="add new post" class="fa fa-plus" aria-hidden="true" style="margin-right: 10px; font-size: 20px; cursor: pointer;"></i>POST</button>
+        </div>
+    </ng-template>
+</div> -->
+<div class="container">
+    <div class="d-flex justify-content-center row" *ngIf="userPosts?.length; else other_content" style="width: 100%;">
+        <div class="container header-btn">
+            <div routerLink="/" style="font-size: 20px; cursor: pointer;">
+                <i title="back" class="fa fa-arrow-left" aria-hidden="true"></i>
+            </div>
+            <div (click)="addNewPost()">
+                <i title="add new post" class="fa fa-plus" aria-hidden="true" style="font-size: 20px; cursor: pointer;"></i>
+            </div>
+        </div>
+        <div class="col-md-12 mb-3" *ngFor="let post of userPosts">
+            <div class="d-flex flex-column comment-section">
+                <div class="bg-white p-2">
+                    <div class="d-flex flex-row user-info"><img class="rounded-circle" src="https://www.kineosystem.com/wp-content/uploads/2016/08/dummy-prod-1.jpg" height="40" width="40">
+                        <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">{{userData.firstName}} {{userData.lastName}}</span><span class="date text-black-50">Shared publicly - Jan 2020</span></div>
+                    </div>
+                    <div class="mt-2">
+                        <p class="comment-text">{{ post.title }}</p>
+                        <p class="comment-text">{{ post.body }}</p>
+                    </div>
+                </div>
+                <div class="bg-white">
+                    <div class="d-flex flex-row fs-12">
+                        <div class="like p-2 cursor"><i class="fa fa-thumbs-o-up"></i><span class="ml-1">Like</span></div>
+                        <div class="like p-2 cursor"><i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span></div>
+                        <div class="like p-2 cursor"><i class="fa fa-share"></i><span class="ml-1">Share</span></div>
+                    </div>
+                </div>
+                <div class="bg-light p-2">
+                    <form [formGroup]="commentForm"  (ngSubmit)="addNewComment(post.id)" class="example-form">
+                        <div class="d-flex flex-row align-items-start">
+                            <!-- <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40"> -->
+                            <textarea class="form-control ml-1 shadow-none textarea" formControlName="name"></textarea>
+                        </div>
+                        <div *ngIf="submitted == true">
+                            <mat-error style="margin-left: 5px;" *ngIf="checkError('name', 'required')">This field is required</mat-error>
+                        </div>
+                        <div class="mt-2 text-right">
+                            <button class="btn btn-primary btn-sm shadow-none" type="submit">Post comment</button>
+                            <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button" (click)="this.commentForm.reset(); this.submitted = false;">Cancel</button>
+                        </div>
+                    </form>
+                    <ng-container *ngFor="let comment of post.comments;">
+                        <div class="" style="background: gainsboro; border-radius: 10px; padding: 8px; margin: 10px;">
+                            <div> {{comment.name}}</div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #other_content>
+        <div class="container1" style="justify-content: center; display: flex;">
+            <h4 style="margin-right: 20px;">Not found any post!</h4>
+            <button mat-raised-button color="primary" (click)="addNewPost()">
+                <i title="add new post" class="fa fa-plus" aria-hidden="true" style="margin-right: 10px; font-size: 20px; cursor: pointer;"></i>POST</button>
+        </div>
+    </ng-template>
+</div>

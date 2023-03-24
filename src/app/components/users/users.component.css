@@ -1,0 +1,13 @@
+table {
+    width:100%;
+}
+
+.container1 {
+    padding: 3rem;
+    margin: auto;
+}
+
+.create-user {
+    display: flex;
+    justify-content: flex-end;
+}
